@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var five = require('johnny-five');
-var board = new five.Board();
+var {Led, Board} = require('johnny-five');
+var board = new Board();
 app.use( express.static( __dirname + '/views' ));
 
 
@@ -14,7 +14,7 @@ app.use(express.urlencoded({
 }))
 
 board.on('ready', () => {
-    var led = five.Led(13);
+    var led = new Led(13);
     var in1 = new Led(7)
     var in2 = new Led(8)
     var in3 = new Led(9)
