@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Robo Controller</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Robot Controller</h1>
+    <button onclick="direction('forward')">Forward</button>
+    <button onclick="direction('backward')">Backward</button>
+    <button onclick="direction('right')">Right</button>
+    <button onclick="direction('left')">Left</button>
+    <button onclick="direction('stop')">Stop</button>
+    <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    </div>
+    <p id="success"></p>
+
+    <script src="jquery.js"></script>
+    <script>
+        function direction(dir) {
+            console.log(dir)
+            $.ajax({
+                url: '/direction',
+                type: 'POST',
+                dataType: 'json',
+                data: {direction: dir},
+                success: function (response) { 
+                    $("#success").html("Moving Robot "+response.direction)
+                }
+            })
+        }
+    </script>
+</body>
+</html>
