@@ -6,7 +6,7 @@ var board = new five.Board();
 app.use( express.static( __dirname + '/views' ));
 
 
-var port = process.env.PORT || "5001";
+var port = process.env.PORT || "8100";
 
 app.use(express.json());
 app.use(express.urlencoded({
