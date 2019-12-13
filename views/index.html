@@ -21,6 +21,11 @@
     </div>
     <p id="success"></p>
 
+    <form id="speech">
+        <textarea name="speechtext" id="speechtext" cols="30" rows="10"></textarea>
+        <button type="submit">Speak</button>
+    </form>
+
     <script src="jquery.js"></script>
     <script>
         function direction(dir) {
@@ -35,6 +40,23 @@
                 }
             })
         }
+    </script>
+    <script>
+        $("#speech").on('submit', (e) => {
+            e.preventDefault();
+            var speechtext = $("#speechtext").val()
+            $.ajax({
+                url: '/speak',
+                type: 'POST',
+                dataType: 'json',
+                data: {speech: speechtext},
+                success: function (res) {
+                    if(res.success){
+                        alert("Speaking")
+                    }
+                }
+            })
+        })
     </script>
 </body>
 </html>

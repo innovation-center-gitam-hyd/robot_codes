@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var {Led, Board} = require('johnny-five');
+var say = require('say')
 var board = new Board();
 app.use( express.static( __dirname + '/views' ));
 
@@ -76,6 +77,14 @@ board.on('ready', () => {
                 direction: direction
             })
         }
+    });
+
+    app.post("/speak", (req, res) => {
+        var speech = req.body.speech;
+        say.speak(speech);
+        res.status(200).json({
+            success: true
+        })
     })
     
     app.listen(port, () => {
