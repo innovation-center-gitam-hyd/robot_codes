@@ -16,10 +16,10 @@ app.use(express.urlencoded({
 
 board.on('ready', () => {
     var led = new Led(13);
-    var in1 = new Led(7)
-    var in2 = new Led(8)
-    var in3 = new Led(9)
-    var in4 = new Led(10)
+    var in1 = new Led(8)
+    var in2 = new Led(9)
+    var in3 = new Led(10)
+    var in4 = new Led(11)
     app.get("/", (req, res) => {
         res.status(200).sendFile(path.join(__dirname+'/views/index.html'))
     });
