@@ -20,6 +20,7 @@ board.on('ready', () => {
     var in2 = new Led(9)
     var in3 = new Led(10)
     var in4 = new Led(11)
+    var bigled = new Led(2)
     app.get("/", (req, res) => {
         res.status(200).sendFile(path.join(__dirname+'/views/index.html'))
     });
@@ -85,6 +86,15 @@ board.on('ready', () => {
         res.status(200).json({
             success: true
         })
+    })
+
+    app.post("/led", (req, res) => {
+        var ledcmd = req.body.ledstatus
+        if(ledcmd){
+            bigled.on()
+        }else{
+            bigled.off()
+        }
     })
     
     app.listen(port, () => {

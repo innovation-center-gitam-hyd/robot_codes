@@ -21,6 +21,7 @@ board.on('ready', () => {
     var in2 = new Led(9)
     var in3 = new Led(10)
     var in4 = new Led(11)
+    var bigled = new Led(2)
 
     const proximity = new Proximity({
         controller: "HCSR04",
@@ -35,8 +36,10 @@ board.on('ready', () => {
             in2.off();
             in3.off();
             in4.off();
+            bigled.on();
         }
         else{
+            bigled.off()
             var robot_dir = database.ref('robots/wally');
             robot_dir.on('value', (snapshot) => {
                 console.log(snapshot.val());
