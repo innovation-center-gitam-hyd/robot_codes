@@ -30,7 +30,7 @@ board.on('ready', () => {
     
     proximity.on('change', () => {
         const {centimeters, inches} = proximity
-        if(centimeters <= 60) {
+        if(centimeters <= 120) {
             led.on();
             in1.off();
             in2.off();
