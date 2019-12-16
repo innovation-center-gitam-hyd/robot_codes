@@ -43,7 +43,7 @@ board.on('ready', () => {
             var robot_dir = database.ref('robots/wally');
             robot_dir.on('value', (snapshot) => {
                 console.log(snapshot.val());
-                var direction = snapshot.val().direction;
+                var direction = snapshot.val().directions;
                 if(direction == 'forward'){
                     led.blink(1000);
                     in1.on();
