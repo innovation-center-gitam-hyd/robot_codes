@@ -92,8 +92,14 @@ board.on('ready', () => {
         var ledcmd = req.body.ledstatus
         if(ledcmd){
             bigled.on()
+            res.status(200).json({
+                success: true
+            })
         }else{
             bigled.off()
+            res.status(200).json({
+                success: true
+            })
         }
     })
     

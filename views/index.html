@@ -16,9 +16,9 @@
     <button onclick="direction('right')">Right</button>
     <button onclick="direction('left')">Left</button>
     <button onclick="direction('stop')">Stop</button>
-    <div class="slidecontainer">
-        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    </div>
+    <button onclick="led('true')">On LED</button>
+    <button onclick="led('false')">Off LED</button>
+    
     <p id="success"></p>
 
     <form id="speech">
@@ -57,6 +57,21 @@
                 }
             })
         })
+    </script>
+    <script>
+        function led(status){
+            $.ajax({
+                url: '/led',
+                type: "POST",
+                dataType: 'json',
+                data: {ledstatus: status},
+                success: function (res) {
+                    if(res.success){
+                        alert(status)
+                    }
+                }
+            })
+        }
     </script>
 </body>
 </html>
