@@ -90,12 +90,12 @@ board.on('ready', () => {
 
     app.post("/led", (req, res) => {
         var ledcmd = req.body.ledstatus
-        if(ledcmd){
+        if(ledcmd == 'true'){
             bigled.on()
             res.status(200).json({
                 success: true
             })
-        }else if(!ledcmd){
+        }else if(ledcmd == 'false'){
             bigled.off()
             res.status(200).json({
                 success: true
