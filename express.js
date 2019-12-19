@@ -95,7 +95,7 @@ board.on('ready', () => {
             res.status(200).json({
                 success: true
             })
-        }else{
+        }else if(!ledcmd){
             bigled.off()
             res.status(200).json({
                 success: true
