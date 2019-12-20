@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Robo Controller</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Robot Controller</h1>
+    <button onclick="direction('forward')">Forward</button>
+    <button onclick="direction('backward')">Backward</button>
+    <button onclick="direction('right')">Right</button>
+    <button onclick="direction('left')">Left</button>
+    <button onclick="direction('stop')">Stop</button>
+    <button onclick="servo('left', 'up')">Left Servo Up</button>
+    <button onclick="servo('left', 'down')">Left Servo Down</button>
+    <button onclick="servo('right', 'up')">Right Servo Up</button>
+    <button onclick="servo('right', 'down')">Right Servo Down</button>
+    <button onclick="servo('both', 'up')">Both Servo Up</button>
+    <button onclick="servo('both', 'down')">Both Servo Down</button>
+    
+    
+    <p id="success"></p>
+
+    <form id="speech">
+        <textarea name="speechtext" id="speechtext" cols="30" rows="10"></textarea>
+        <button type="submit">Speak</button>
+    </form>
+
+    <script src="jquery.js"></script>
+    <script>
+        function direction(dir) {
+            console.log(dir)
+            $.ajax({
+                url: '/direction',
+                type: 'POST',
+                dataType: 'json',
+                data: {direction: dir},
+                success: function (response) { 
+                    $("#success").html("Moving Robot "+response.direction)
+                }
+            })
+        }
+    </script>
+    <script>
+        $("#speech").on('submit', (e) => {
+            e.preventDefault();
+            var speechtext = $("#speechtext").val()
+            $.ajax({
+                url: '/speak',
+                type: 'POST',
+                dataType: 'json',
+                data: {speech: speechtext},
+                success: function (res) {
+                    if(res.success){
+                        alert("Speaking")
+                    }
+                }
+            })
+        })
+    </script>
+    <script>
+        function servo(side, direction){
+            $.ajax({
+                url: '/servo',
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    side,
+                    direction
+                },
+                success: function (res) {
+                    $("#success").html("Moving "+side+" Hands "+direction)
+                }
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var {Led, Board} = require('johnny-five');
+var {Led, Board, Servo} = require('johnny-five');
 var say = require('say')
 var board = new Board();
 app.use( express.static( __dirname + '/views' ));
@@ -22,8 +22,24 @@ board.on('ready', () => {
     var in2 = new Led(9)
     var in3 = new Led(10)
     var in4 = new Led(11)
+    var servoright = new five.Servo({
+        id: "rightServo",     // User defined id
+        pin: 5,           // Which pin is it attached to?
+        type: "standard",  // Default: "standard". Use "continuous" for continuous rotation servos
+        range: [0,180],    // Default: 0-180
+        fps: 100,          // Used to calculate rate of movement between positions
+        invert: false,     // Invert all specified positions
+    });
+    var servoleft = new five.Servo({
+        id: "leftServo",     // User defined id
+        pin: 6,           // Which pin is it attached to?
+        type: "standard",  // Default: "standard". Use "continuous" for continuous rotation servos
+        range: [0,180],    // Default: 0-180
+        fps: 100,          // Used to calculate rate of movement between positions
+        invert: false,     // Invert all specified positions
+    });
     app.get("/", (req, res) => {
-        res.status(200).sendFile(path.join(__dirname+'/views/index.html'))
+        res.status(200).sendFile(path.join(__dirname+'/views/serena.html'))
     });
     
     app.post("/direction", (req, res) => {
@@ -89,6 +105,35 @@ board.on('ready', () => {
         })
     })
 
+    app.post("/servo", (req, res) => {
+        var direction = req.body.direction;
+        var side = req.body.side;
+        console.log(direction, side)
+        if(side == 'left'){
+            if(direction == 'up'){
+                servoleft.min()
+            }
+            else if(direction == 'down'){
+
+            }
+        }
+        else if(side == 'right'){
+            if(direction == 'up'){
+
+            }
+            else if(direction == 'down'){
+
+            }
+        }
+        else if(side == 'both'){
+            if(direction == 'up'){
+
+            }
+            else if(direction == 'down'){
+
+            }
+        }
+    });
     
     app.listen(port, () => {
         console.log(`Listening to requests on http://localhost:${port}`);
