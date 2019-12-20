@@ -22,7 +22,7 @@ board.on('ready', () => {
     var in2 = new Led(9)
     var in3 = new Led(10)
     var in4 = new Led(11)
-    var servoright = new five.Servo({
+    var servoright = new Servo({
         id: "rightServo",     // User defined id
         pin: 5,           // Which pin is it attached to?
         type: "standard",  // Default: "standard". Use "continuous" for continuous rotation servos
@@ -30,7 +30,7 @@ board.on('ready', () => {
         fps: 100,          // Used to calculate rate of movement between positions
         invert: false,     // Invert all specified positions
     });
-    var servoleft = new five.Servo({
+    var servoleft = new Servo({
         id: "leftServo",     // User defined id
         pin: 6,           // Which pin is it attached to?
         type: "standard",  // Default: "standard". Use "continuous" for continuous rotation servos
