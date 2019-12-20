@@ -39,7 +39,7 @@ board.on('ready', () => {
         invert: false,     // Invert all specified positions
     });
     app.get("/", (req, res) => {
-        res.status(200).sendFile(path.join(__dirname+'/views/serena.html'))
+        res.status(200).sendFile(path.join(__dirname+'/views/index.html'))
     });
     
     app.post("/direction", (req, res) => {

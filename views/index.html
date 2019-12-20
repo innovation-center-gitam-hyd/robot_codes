@@ -18,6 +18,13 @@
     <button onclick="direction('stop')">Stop</button>
     <button onclick="led('true')">On LED</button>
     <button onclick="led('false')">Off LED</button>
+    <br>
+    <button onclick="servo('left', 'up')">Left Servo Up</button>
+    <button onclick="servo('left', 'down')">Left Servo Down</button>
+    <button onclick="servo('right', 'up')">Right Servo Up</button>
+    <button onclick="servo('right', 'down')">Right Servo Down</button>
+    <button onclick="servo('both', 'up')">Both Servo Up</button>
+    <button onclick="servo('both', 'down')">Both Servo Down</button>
     
     <p id="success"></p>
 
@@ -73,5 +80,21 @@
             })
         }
     </script>
+    <script>
+            function servo(side, direction){
+                $.ajax({
+                    url: '/servo',
+                    type: "POST",
+                    dataType: 'json',
+                    data: {
+                        side,
+                        direction
+                    },
+                    success: function (res) {
+                        $("#success").html("Moving "+side+" Hands "+direction)
+                    }
+                })
+            }
+        </script>
 </body>
 </html>
