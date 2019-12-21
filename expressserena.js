@@ -119,7 +119,7 @@ board.on('ready', () => {
         }
         else if(side == 'right'){
             if(direction == 'up'){
-                servoright.to(80)
+                servoright.to(20)
             }
             else if(direction == 'down'){
                 servoright.to(65)
